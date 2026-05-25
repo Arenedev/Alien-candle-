@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALIEN CANDLE — $ALCD on Solana</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- STARFIELD CANVAS -->
+<canvas id="starfield"></canvas>
+
+<!-- SCANLINES OVERLAY -->
+<div class="scanlines"></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">
+    <span class="alien-glyph">👽</span>
+    <span class="logo-text">ALIEN<span class="accent">CANDLE</span></span>
+  </div>
+  <div class="nav-links">
+    <a href="#about">ABOUT</a>
+    <a href="#tokenomics">TOKENOMICS</a>
+    <a href="#leaderboard">LEADERBOARD</a>
+    <a href="#chart">CHART</a>
+    <a href="https://x.com/alien_candle" target="_blank" class="social-link">𝕏</a>
+    <a href="https://t.me/" target="_blank" class="social-link">TG</a>
+    <a href="https://dexscreener.com/solana/FfssCFbbH4YkjK7cpNrsmFkckMgGcALYq3YmHgbrAk4G" target="_blank" class="btn-buy">BUY $ALCD</a>
+  </div>
+  <button class="nav-toggle" onclick="toggleNav()">☰</button>
+</nav>
+
+<!-- MOBILE NAV MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="toggleNav()">ABOUT</a>
+  <a href="#tokenomics" onclick="toggleNav()">TOKENOMICS</a>
+  <a href="#leaderboard" onclick="toggleNav()">LEADERBOARD</a>
+  <a href="#chart" onclick="toggleNav()">CHART</a>
+  <a href="https://x.com/alien_candle" target="_blank">𝕏 TWITTER</a>
+  <a href="https://t.me/" target="_blank">TELEGRAM</a>
+  <a href="https://dexscreener.com/solana/FfssCFbbH4YkjK7cpNrsmFkckMgGcALYq3YmHgbrAk4G" target="_blank" class="btn-buy">BUY $ALCD</a>
+</div>
+
+<!-- HERO SECTION -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-badge">🛸 LIVE ON SOLANA</div>
+    <h1 class="hero-title">
+      <span class="line1">ALIEN</span>
+      <span class="line2">CANDLE</span>
+    </h1>
+    <p class="hero-sub">The cosmos burns green. The aliens are buying.<br/>Join the most galactic memecoin on Solana.</p>
+
+    <!-- LIVE STATS BAR -->
+    <div class="stats-bar" id="statsBar">
+      <div class="stat-item">
+        <span class="stat-label">PRICE</span>
+        <span class="stat-value" id="livePrice">Loading...</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-label">24H CHANGE</span>
+        <span class="stat-value" id="liveChange">—</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-label">MARKET CAP</span>
+        <span class="stat-value" id="liveMcap">—</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-label">24H VOLUME</span>
+        <span class="stat-value" id="liveVolume">—</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-label">LIQUIDITY</span>
+        <span class="stat-value" id="liveLiquidity">—</span>
+      </div>
+    </div>
+
+    <div class="hero-ctas">
+      <a href="https://dexscreener.com/solana/FfssCFbbH4YkjK7cpNrsmFkckMgGcALYq3YmHgbrAk4G" target="_blank" class="cta-primary">🚀 BUY NOW</a>
+      <a href="#chart" class="cta-secondary">📊 VIEW CHART</a>
+    </div>
+
+    <!-- CONTRACT ADDRESS -->
+    <div class="contract-box">
+      <span class="contract-label">CONTRACT ADDRESS</span>
+      <div class="contract-row">
+        <code id="contractAddr">H4HMME8GGDtERTGAEeW6h6tTVzEksa4GGYTxZ7pe4ray</code>
+        <button class="copy-btn" onclick="copyContract()" title="Copy">⎘ COPY</button>
+      </div>
+      <span class="copy-confirm" id="copyConfirm">✅ Copied!</span>
+    </div>
+  </div>
+
+  <!-- ALIEN CANDLE VISUAL -->
+  <div class="hero-visual">
+    <div class="candle-container">
+      <canvas id="candleCanvas" width="320" height="400"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER TAPE -->
+<div class="ticker-wrapper">
+  <div class="ticker-tape" id="tickerTape">
+    <span>🛸 $ALCD 🕯️ ALIEN CANDLE &nbsp;•&nbsp; THE COSMOS IS BULLISH &nbsp;•&nbsp; SOLANA'S MOST GALACTIC TOKEN &nbsp;•&nbsp; 👽 THEY CAME FOR THE GAINS &nbsp;•&nbsp; 🕯️ CANDLES THAT ARE OUT OF THIS WORLD &nbsp;•&nbsp; 🚀 TO THE MOON AND BEYOND &nbsp;•&nbsp; </span>
+    <span>🛸 $ALCD 🕯️ ALIEN CANDLE &nbsp;•&nbsp; THE COSMOS IS BULLISH &nbsp;•&nbsp; SOLANA'S MOST GALACTIC TOKEN &nbsp;•&nbsp; 👽 THEY CAME FOR THE GAINS &nbsp;•&nbsp; 🕯️ CANDLES THAT ARE OUT OF THIS WORLD &nbsp;•&nbsp; 🚀 TO THE MOON AND BEYOND &nbsp;•&nbsp; </span>
+  </div>
+</div>
+
+<!-- ABOUT SECTION -->
+<section class="about" id="about">
+  <div class="section-header">
+    <div class="section-tag">// TRANSMISSION RECEIVED</div>
+    <h2 class="section-title">WHAT IS <span class="accent">ALIEN CANDLE</span>?</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-card">
+      <div class="about-icon">👽</div>
+      <h3>EXTRATERRESTRIAL ORIGIN</h3>
+      <p>Born from the stars, Alien Candle landed on Solana with one mission: to illuminate the crypto universe with green candles and galactic gains.</p>
+    </div>
+    <div class="about-card">
+      <div class="about-icon">🕯️</div>
+      <h3>COSMIC CANDLESTICKS</h3>
+      <p>Every candle tells a story. Alien Candle's chart burns bright across the cosmos — fueled by a community of interstellar degens who know no limits.</p>
+    </div>
+    <div class="about-card">
+      <div class="about-icon">🌌</div>
+      <h3>COMMUNITY POWERED</h3>
+      <p>No rugs. No games. Just a tight-knit alien army stacking bags, making memes, and watching the candles burn higher than any rocket can fly.</p>
+    </div>
+    <div class="about-card">
+      <div class="about-icon">⚡</div>
+      <h3>SOLANA SPEED</h3>
+      <p>Built on the fastest chain in the galaxy. Transactions settle in milliseconds. Because when aliens trade, they don't wait — they warp.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CHART SECTION -->
+<section class="chart-section" id="chart">
+  <div class="section-header">
+    <div class="section-tag">// GALACTIC RADAR</div>
+    <h2 class="section-title">LIVE <span class="accent">CHART</span></h2>
+  </div>
+  <div class="chart-wrapper">
+    <iframe
+      id="dexChart"
+      src="https://dexscreener.com/solana/FfssCFbbH4YkjK7cpNrsmFkckMgGcALYq3YmHgbrAk4G?embed=1&theme=dark&trades=1&info=0"
+      frameborder="0"
+      allowfullscreen
+    ></iframe>
+  </div>
+  <div class="chart-links">
+    <a href="https://dexscreener.com/solana/FfssCFbbH4YkjK7cpNrsmFkckMgGcALYq3YmHgbrAk4G" target="_blank" class="link-btn">📊 DEXSCREENER</a>
+    <a href="https://birdeye.so/token/H4HMME8GGDtERTGAEeW6h6tTVzEksa4GGYTxZ7pe4ray?chain=solana" target="_blank" class="link-btn">🦅 BIRDEYE</a>
+    <a href="https://solscan.io/token/H4HMME8GGDtERTGAEeW6h6tTVzEksa4GGYTxZ7pe4ray" target="_blank" class="link-btn">🔍 SOLSCAN</a>
+  </div>
+</section>
+
+<!-- LEADERBOARD SECTION -->
+<section class="leaderboard-section" id="leaderboard">
+  <div class="section-header">
+    <div class="section-tag">// GALACTIC RANKINGS</div>
+    <h2 class="section-title">TRADE <span class="accent">LEADERBOARD</span></h2>
+    <p class="section-sub">Live top traders — refreshes every 30s</p>
+  </div>
+
+  <div class="leaderboard-grid">
+    <!-- TOP BUYERS -->
+    <div class="lb-panel">
+      <div class="lb-header buyers">
+        <span class="lb-icon">🟢</span>
+        <span>TOP 10 BUYERS</span>
+        <span class="lb-live-dot"></span>
+      </div>
+      <div class="lb-table-header">
+        <span>#</span><span>WALLET</span><span>AMOUNT</span><span>USD</span>
+      </div>
+      <div class="lb-body" id="topBuyers">
+        <div class="lb-loading">
+          <div class="orbit-loader"></div>
+          <span>Scanning the cosmos...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOP SELLERS -->
+    <div class="lb-panel">
+      <div class="lb-header sellers">
+        <span class="lb-icon">🔴</span>
+        <span>TOP 10 SELLERS</span>
+        <span class="lb-live-dot red"></span>
+      </div>
+      <div class="lb-table-header">
+        <span>#</span><span>WALLET</span><span>AMOUNT</span><span>USD</span>
+      </div>
+      <div class="lb-body" id="topSellers">
+        <div class="lb-loading">
+          <div class="orbit-loader"></div>
+          <span>Scanning the cosmos...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECENT TRADES -->
+  <div class="recent-trades-wrapper">
+    <div class="lb-header" style="background: rgba(100,80,200,0.2); border-color: #8b5cf6;">
+      <span class="lb-icon">⚡</span>
+      <span>RECENT TRADES</span>
+      <span class="lb-live-dot purple"></span>
+    </div>
+    <div class="lb-table-header five-col">
+      <span>TIME</span><span>TYPE</span><span>PRICE</span><span>AMOUNT</span><span>WALLET</span>
+    </div>
+    <div class="lb-body" id="recentTrades">
+      <div class="lb-loading">
+        <div class="orbit-loader"></div>
+        <span>Loading trades...</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOKENOMICS SECTION -->
+<section class="tokenomics" id="tokenomics">
+  <div class="section-header">
+    <div class="section-tag">// TOKEN INTEL</div>
+    <h2 class="section-title">TOKE<span class="accent">NOMICS</span></h2>
+  </div>
+  <div class="tokenomics-grid">
+    <div class="tknmx-visual">
+      <canvas id="donutChart" width="320" height="320"></canvas>
+      <div class="donut-center">
+        <span class="donut-label">$ALCD</span>
+        <span class="donut-sub">TOTAL SUPPLY</span>
+        <span class="donut-val" id="totalSupply">—</span>
+      </div>
+    </div>
+    <div class="tknmx-info">
+      <div class="tknmx-row">
+        <span class="tknmx-dot" style="background:#00ff9d"></span>
+        <span class="tknmx-name">COMMUNITY / TRADING</span>
+        <span class="tknmx-pct">80%</span>
+      </div>
+      <div class="tknmx-row">
+        <span class="tknmx-dot" style="background:#00d4ff"></span>
+        <span class="tknmx-name">LIQUIDITY POOL</span>
+        <span class="tknmx-pct">10%</span>
+      </div>
+      <div class="tknmx-row">
+        <span class="tknmx-dot" style="background:#7c3aed"></span>
+        <span class="tknmx-name">MARKETING</span>
+        <span class="tknmx-pct">5%</span>
+      </div>
+      <div class="tknmx-row">
+        <span class="tknmx-dot" style="background:#f59e0b"></span>
+        <span class="tknmx-name">TEAM / DEV</span>
+        <span class="tknmx-pct">5%</span>
+      </div>
+      <div class="tknmx-divider"></div>
+      <div class="tknmx-detail">
+        <div class="td-item">
+          <span class="td-label">NETWORK</span>
+          <span class="td-val">Solana</span>
+        </div>
+        <div class="td-item">
+          <span class="td-label">TAX</span>
+          <span class="td-val">0 / 0</span>
+        </div>
+        <div class="td-item">
+          <span class="td-label">LP STATUS</span>
+          <span class="td-val">🔒 LOCKED</span>
+        </div>
+        <div class="td-item">
+          <span class="td-label">MINT AUTH</span>
+          <span class="td-val">🔥 REVOKED</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO BUY -->
+<section class="how-to-buy" id="buy">
+  <div class="section-header">
+    <div class="section-tag">// BOARDING PROTOCOL</div>
+    <h2 class="section-title">HOW TO <span class="accent">BUY</span></h2>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <h3>GET A WALLET</h3>
+      <p>Download <strong>Phantom</strong> or <strong>Solflare</strong> wallet. Create your wallet and save your seed phrase securely.</p>
+      <a href="https://phantom.app" target="_blank" class="step-link">phantom.app →</a>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <h3>GET SOME SOL</h3>
+      <p>Buy <strong>SOL</strong> from any exchange (Coinbase, Binance, Kraken) and send it to your Phantom wallet.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <h3>SWAP TO $ALCD</h3>
+      <p>Head to <strong>Raydium</strong> or <strong>Jupiter</strong>, paste the contract address below, and swap your SOL for $ALCD.</p>
+      <a href="https://jup.ag/swap/SOL-H4HMME8GGDtERTGAEeW6h6tTVzEksa4GGYTxZ7pe4ray" target="_blank" class="step-link">jupiter.ag →</a>
+    </div>
+    <div class="step-card">
+      <div class="step-num">04</div>
+      <h3>HODL & VIBE</h3>
+      <p>Welcome to the alien army! Join our <strong>Telegram</strong> and <strong>Twitter</strong> community and watch the candles burn green.</p>
+    </div>
+  </div>
+  <div class="contract-box center-ca">
+    <span class="contract-label">CONTRACT ADDRESS — PASTE IN DEX</span>
+    <div class="contract-row">
+      <code>H4HMME8GGDtERTGAEeW6h6tTVzEksa4GGYTxZ7pe4ray</code>
+      <button class="copy-btn" onclick="copyContract()">⎘ COPY</button>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY SECTION -->
+<section class="community" id="community">
+  <div class="section-header">
+    <div class="section-tag">// JOIN THE FLEET</div>
+    <h2 class="section-title">ALIEN <span class="accent">COMMUNITY</span></h2>
+  </div>
+  <div class="community-cards">
+    <a href="https://x.com/alien_candle" target="_blank" class="comm-card twitter">
+      <div class="comm-icon">𝕏</div>
+      <div class="comm-label">TWITTER / X</div>
+      <div class="comm-desc">Follow for updates, memes & alpha</div>
+      <div class="comm-arrow">→</div>
+    </a>
+    <a href="https://t.me/" target="_blank" class="comm-card telegram">
+      <div class="comm-icon">✈</div>
+      <div class="comm-label">TELEGRAM</div>
+      <div class="comm-desc">Join the alien army chat</div>
+      <div class="comm-arrow">→</div>
+    </a>
+    <a href="https://dexscreener.com/solana/FfssCFbbH4YkjK7cpNrsmFkckMgGcALYq3YmHgbrAk4G" target="_blank" class="comm-card dex">
+      <div class="comm-icon">📊</div>
+      <div class="comm-label">DEXSCREENER</div>
+      <div class="comm-desc">Track live price & trades</div>
+      <div class="comm-arrow">→</div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">
+    <span class="alien-glyph">👽</span>
+    <span class="logo-text">ALIEN<span class="accent">CANDLE</span></span>
+  </div>
+  <p class="footer-disclaimer">$ALCD is a meme token with no intrinsic value or financial promise. Always do your own research. This is not financial advice. The cosmos is unforgiving — trade responsibly.</p>
+  <div class="footer-links">
+    <a href="https://x.com/alien_candle" target="_blank">Twitter</a>
+    <a href="https://dexscreener.com/solana/FfssCFbbH4YkjK7cpNrsmFkckMgGcALYq3YmHgbrAk4G" target="_blank">DexScreener</a>
+    <a href="https://solscan.io/token/H4HMME8GGDtERTGAEeW6h6tTVzEksa4GGYTxZ7pe4ray" target="_blank">Solscan</a>
+  </div>
+  <p class="footer-copy">© 2025 ALIEN CANDLE — All rights reserved across the multiverse</p>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
